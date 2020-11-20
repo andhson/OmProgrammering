@@ -1,12 +1,22 @@
 import random
 from os import system, name
 from time import sleep 
-from words import word_list
+from ordlista import ord_lista3, ord_lista5
 
-
-def get_word():
-    word = random.choice(word_list)
-    return word.upper()
+def get_word(val):
+    if val == 1:
+        word = random.choice(ord_lista3)
+        return word.upper()
+    elif val == 2:
+        word = random.choice(ord_lista5)
+        return word.upper()
+    elif val == 3:
+        word = input('Skriv in dit egna ord:')
+        clear()
+        return word.upper()
+    else:
+        print('Ogiltigt val!')
+        
 
 
 def play(word):
@@ -171,6 +181,12 @@ def display_hangman(tries):
 def printGuessedWord(guessed_letters):
     print(f'Gissade bokstäver: {guessed_letters}\n')
 
+def printInitial():
+    print('Välj hur vill du spela Hangman.')
+    print('1. Ord med tre bokstäver.')
+    print('2. Ord med fem bokstäver.')
+    print('3. Skriv in eget ord.') 
+
 # define our clear function 
 def clear(): 
     # for windows 
@@ -181,10 +197,14 @@ def clear():
         _ = system('clear') 
 
 def main():
-    word = get_word()
+    printInitial()
+    val = int(input('Skriv in valt alternativ'))
+    word = get_word(val)
     play(word)
     while input("Vill du spela igen? (J/N) ").upper() == "J":
-        word = get_word()
+        printInitial()
+        val = int(input('Skriv in valt alternativ'))
+        word = get_word(val)
         play(word)
 
 
